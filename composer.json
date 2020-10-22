@@ -1,0 +1,19 @@
+{
+	"name": "yuri-gress/boa-compra",
+	"type": "project",
+	"authors": [
+		{
+			"name": "Yuri Matheus Gress",
+			"email": "yurimatheus.gress@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=7.2",
+		"php-di/php-di": "^6.3"
+	},
+	"autoload": {
+		"psr-4": {
+			"YuriGress\\BoaCompra\\": "src/"
+		}
+	}
+}
