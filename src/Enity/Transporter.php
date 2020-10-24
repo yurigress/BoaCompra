@@ -2,7 +2,9 @@
 
 namespace YuriGress\BoaCompra\Entity;
 
-class Transporter {
+use YuriGress\BoaCompra\Mapping\TransporterMapping;
+
+class Transporter extends AbstractEntity {
 	
 	/** @var string Identificar da transportadora */
 	private $id;
@@ -10,10 +12,14 @@ class Transporter {
 	/** @var string Nome da transportadora */
 	private $name;
 	
-	/** @var Rate[] */
+	/** @var \ArrayIterator */
 	private $rates;
 	
-	public function __construct() {
+	protected $expandable = ['rates' => Rate::class];
+	
+	public function __construct($data = null) {
+		parent::__construct($data);
+		
 		$this->rates = new \ArrayIterator();
 	}
 	
@@ -35,16 +41,21 @@ class Transporter {
 		return $this;
 	}
 	
+	public function setRates(\ArrayIterator $rates): Transporter {
+		$this->rates = $rates;
+		return $this;
+	}
+	
 	public function getRates(): array {
 		return $this->rates->getArrayCopy();
 	}
 	
-	public function getRate(Rate $rate): ?Rate {
+	public function getRate(string $idRate): ?Rate {
 		$this->rates->rewind();
 		while ($this->rates->valid()) {
 			/** @var Rate $current */
 			$current = $this->rates->current();
-			if ($rate->getId() == $current->getId()) {
+			if ($idRate == $current->getId()) {
 				return $current;
 			}
 			$this->rates->next();
@@ -63,6 +74,11 @@ class Transporter {
 				$this->rates->offsetUnset($index);
 			}
 		};
+		return $this;
+	}
+	
+	public function setMapping(): AbstractEntity {
+		$this->mapping = TransporterMapping::class;
 		return $this;
 	}
 }

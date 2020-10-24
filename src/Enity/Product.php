@@ -2,7 +2,9 @@
 
 namespace YuriGress\BoaCompra\Entity;
 
-class Product {
+use YuriGress\BoaCompra\Mapping\ProductMapping;
+
+class Product extends AbstractEntity {
 	
 	/** @var string Identificado de produto */
 	private $id;
@@ -12,6 +14,9 @@ class Product {
 	
 	/** @var string Tipo da unidade do produto (KG|UN|...) */
 	private $unitaryType;
+	
+	/** @var float Peso do produto para a viagem */
+	private $weight;
 	
 	public const UNITARY_TYPE_KG = 'KG';
 	
@@ -41,4 +46,20 @@ class Product {
 		$this->unitaryType = $unitaryType;
 		return $this;
 	}
+	
+	public function getWeight(): float {
+		return $this->weight;
+	}
+	
+	public function setWeight(float $weight): Product {
+		$this->weight = $weight;
+		return $this;
+	}
+	
+	public function setMapping(): AbstractEntity {
+		$this->mapping = ProductMapping::class;
+		return $this;
+	}
+	
+	
 }

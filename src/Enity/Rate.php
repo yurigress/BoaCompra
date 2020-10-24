@@ -2,7 +2,9 @@
 
 namespace YuriGress\BoaCompra\Entity;
 
-class Rate {
+use YuriGress\BoaCompra\Mapping\RateMapping;
+
+class Rate extends AbstractEntity {
 	
 	/** @var string Identificador da taxa. Utilizado uuid como identificador */
 	private $id;
@@ -121,5 +123,10 @@ class Rate {
 	 */
 	public static function getCriteriaTypes(): array {
 		return [self::CRITERIA_TYPE_KG, self::CRITERIA_TYPE_KM];
+	}
+	
+	public function setMapping(): AbstractEntity {
+		$this->mapping = RateMapping::class;
+		return $this;
 	}
 }

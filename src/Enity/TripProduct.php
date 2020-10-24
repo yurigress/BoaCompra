@@ -2,9 +2,11 @@
 
 namespace YuriGress\BoaCompra\Entity;
 
-class TripProduct {
+use YuriGress\BoaCompra\Mapping\TripProductMapping;
+
+class TripProduct extends AbstractEntity {
 	
-	/** @var string Identificador do registro */
+	/** @var string Identificador do regis\tro */
 	private $id;
 	
 	/** @var string Identificador da viagem. "Foreign key" com Trip */
@@ -12,9 +14,6 @@ class TripProduct {
 	
 	/** @var string Identificador do produto. "Foreign key" com Product */
 	private $idProduct;
-	
-	/** @var float Peso do produto para a viagem */
-	private $weight;
 	
 	public function getId(): string {
 		return $this->id;
@@ -43,12 +42,8 @@ class TripProduct {
 		return $this;
 	}
 	
-	public function getWeight(): float {
-		return $this->weight;
-	}
-	
-	public function setWeight(float $weight): TripProduct {
-		$this->weight = $weight;
+	public function setMapping(): AbstractEntity {
+		$this->mapping = TripProductMapping::class;
 		return $this;
 	}
 }
