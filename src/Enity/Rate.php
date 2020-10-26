@@ -104,7 +104,7 @@ class Rate extends AbstractEntity {
 	 * @return bool
 	 */
 	public function hasCriteria(): bool {
-		return !empty($this->criteriaOperator) && !empty($this->criteriaType) && !empty($this->criteriaValue);
+		return (!empty($this->criteriaOperator) && !empty($this->criteriaType) && !empty($this->criteriaValue));
 	}
 	
 	/**
